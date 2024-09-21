@@ -33,6 +33,9 @@ public class Camera2D {
     public Vector2 WorldToScreen(Vector2 position)
         => Vector2.Transform(position, _transform);
 
+    public Vector2 ScreenToWorld(Vector2 position)
+        => Vector2.Transform(position, Matrix.Invert(_transform));
+
     public Matrix Transform {
         get => _transform;
         set {
