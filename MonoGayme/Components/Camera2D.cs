@@ -36,6 +36,9 @@ public class Camera2D {
     public Vector2 ScreenToWorld(Vector2 position)
         => Vector2.Transform(position, Matrix.Invert(_transform));
 
+    /// <summary>
+    /// I do not recommend Setting this value.
+    /// </summary>
     public Matrix Transform {
         get => _transform;
         set {
@@ -46,9 +49,6 @@ public class Camera2D {
         }
     }
 
-    /// <summary>
-    /// I do not recommend Setting this value.
-    /// </summary>
     public float Zoom {
         get => _z;
         set {
