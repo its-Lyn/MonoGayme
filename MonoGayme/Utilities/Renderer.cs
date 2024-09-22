@@ -1,6 +1,7 @@
 using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 
 namespace MonoGayme.Utilities;
 
@@ -50,5 +51,22 @@ public class Renderer(Vector2 size, GraphicsDevice graphics) {
                 Color.White
             );
         batch.End();
+    }
+
+    /// <summary>
+    /// Gets the virtual mouse position based on the renderer's internal size.
+    /// </summary>
+    public Vector2 GetVirtualMousePosition()
+    {
+        Vector2 position = Mouse.GetState().Position.ToVector2();
+        
+        float scale = GetScale();
+        float virtualMouseX = (position.X - ((graphics.Viewport.Width - (size.X * scale)) / 2)) / scale;
+        float virtualMouseY = (position.Y - ((graphics.Viewport.Height - (size.Y * scale)) / 2)) / scale;
+
+        return new Vector2(
+            MathHelper.Clamp(virtualMouseX, 0, size.X),
+            MathHelper.Clamp(virtualMouseY, 0, size.Y)
+        );
     }
 }
