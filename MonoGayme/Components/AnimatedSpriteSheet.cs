@@ -20,6 +20,8 @@ public class AnimatedSpriteSheet {
     public bool Done = true;
     public bool Loop;
 
+    public Action? OnSheetFinished;
+
     public AnimatedSpriteSheet(Texture2D sprite, Vector2 size, float speed, bool loop = false, Vector2? origin = null) {
         _origin = origin ?? Vector2.Zero;
         
@@ -46,6 +48,8 @@ public class AnimatedSpriteSheet {
                 if (!Loop) {
                     Done = true;
                 }
+
+                OnSheetFinished?.Invoke();
             }
 
             _source.X = (int)(_frame * _frameSize.X);
