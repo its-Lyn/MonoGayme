@@ -17,7 +17,7 @@ public class AnimatedSpriteSheet {
     private float _frameTimer = 0;
     private int _frame = 0;
 
-    public bool Done = true;
+    public bool Finished = true;
     public bool Loop;
 
     public Action? OnSheetFinished;
@@ -46,7 +46,7 @@ public class AnimatedSpriteSheet {
                 _frame = 0;
 
                 if (!Loop) {
-                    Done = true;
+                    Finished = true;
                 }
 
                 OnSheetFinished?.Invoke();

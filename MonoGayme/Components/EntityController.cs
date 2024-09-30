@@ -28,7 +28,7 @@ public class EntityController {
     /// Get the first entity with a matching type.
     /// </summary>
     public T? GetFirst<T>() where T : Entity 
-        => (T?)Entities.Find(e => e.GetType() == typeof(T));
+        => (T?)Entities.Find(e => e is T);
 
     /// <summary>
     /// Queue entity for removal the next frame.

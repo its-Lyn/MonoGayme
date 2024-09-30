@@ -1,8 +1,8 @@
-﻿using Microsoft.Xna.Framework;
+﻿using MonoGayme.Components.Colliders;
 
 namespace MonoGayme.Entities.Colliders;
 
 public interface IRectCollider
 {
-    public Rectangle Collider { get; set; }
+    public RectCollider Collider { get; set; }
 }
