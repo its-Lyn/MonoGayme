@@ -2,8 +2,10 @@ using Microsoft.Xna.Framework;
 
 namespace MonoGayme.Utilities;
 
-public static partial class Extensions {
-    public static void SetWindowSize(this GraphicsDeviceManager graphics, int width, int height) {
+public static partial class Extensions
+{
+    public static void SetWindowSize(this GraphicsDeviceManager graphics, int width, int height)
+    {
         graphics.PreferredBackBufferWidth = width;
         graphics.PreferredBackBufferHeight = height;
 

@@ -5,7 +5,8 @@ using MonoGayme.Components;
 
 namespace MonoGayme.UI;
 
-public abstract class Button {
+public abstract class Button
+{
     public Action? OnClick;
 
     public Vector2 Position;
@@ -14,8 +15,10 @@ public abstract class Button {
     public abstract void Update(Vector2 mouse);
     public abstract void Draw(SpriteBatch batch, Camera2D? camera);
 
-    public void RunAction() {
-        if (OnClick is null) {
+    public void RunAction()
+    {
+        if (OnClick is null)
+        {
             Console.Error.WriteLine("Button has no OnClick callback! Skipping.");
             return;
         }

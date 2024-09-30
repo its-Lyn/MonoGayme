@@ -7,7 +7,8 @@ namespace MonoGayme.States;
 /// Creates a new Game State.
 /// </summary>
 /// <param name="windowData">Instance to the main Game class for data handling.</param>
-public abstract class State(Game windowData) {
+public abstract class State(Game windowData)
+{
     protected Game WindowData = windowData;
 
     public abstract void LoadContent();

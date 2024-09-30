@@ -3,7 +3,8 @@ using MonoGayme.Utilities;
 
 namespace MonoGayme.Components.Colliders;
 
-public class RectCollider : Component {
+public class RectCollider : Component
+{
     public Rectangle Bounds;
 
     public bool Enabled = true;

@@ -5,7 +5,8 @@ using MonoGayme.Controllers;
 
 namespace MonoGayme.Entities;
 
-public abstract class Entity(Game windowData, int zIndex = 0) {
+public abstract class Entity(Game windowData, int zIndex = 0)
+{
     public int ZIndex = zIndex;
     protected Game WindowData = windowData;
 

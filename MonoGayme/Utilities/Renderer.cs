@@ -34,7 +34,8 @@ public class Renderer(Vector2 size, GraphicsDevice graphics) {
     /// Sets the render target to the whole screen. 
     /// Then draws the given renderer scaled in the centre so it always fits.
     /// </summary>
-    public void DrawRenderer(SpriteBatch batch) {
+    public void DrawRenderer(SpriteBatch batch)
+    {
         graphics.SetRenderTarget(null);
         graphics.Clear(Color.Black);
 

@@ -6,10 +6,12 @@ namespace MonoGayme.States;
 /// <summary>
 /// Helper class used for Game State handling.
 /// </summary>
-public class StateContext {
+public class StateContext
+{
     private State? _activeState;
 
-    public void SwitchState(State state) {
+    public void SwitchState(State state)
+    {
         _activeState = state;
         _activeState.LoadContent();
     }

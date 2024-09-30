@@ -4,14 +4,16 @@ using Microsoft.Xna.Framework.Input;
 
 namespace MonoGayme.Utilities;
 
-public static class InputManager {
+public static class InputManager
+{
     private static KeyboardState _previousState;
     private static KeyboardState _currentState;
 
     private static GamePadState _previousControllerState;
     private static GamePadState _currentControllerState;
 
-    static InputManager() {
+    static InputManager()
+    {
         _currentState = Keyboard.GetState();
         _previousState = _currentState;
 
@@ -52,7 +54,8 @@ public static class InputManager {
     /// <summary>
     /// Update the input device state. Must only be ran once a frame.
     /// </summary>
-    public static void GetState() {
+    public static void GetState()
+    {
         _previousState = _currentState;
         _currentState = Keyboard.GetState();
 

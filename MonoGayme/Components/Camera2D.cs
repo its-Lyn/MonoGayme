@@ -2,7 +2,8 @@ using Microsoft.Xna.Framework;
 
 namespace MonoGayme.Components;
 
-public class Camera2D : Component {
+public class Camera2D : Component
+{
     private Matrix _transform;
     private Matrix _view;
 
@@ -11,7 +12,8 @@ public class Camera2D : Component {
 
     private float _z;
 
-    public Camera2D(Vector2 pos, float zoom = 1, Vector2? origin = null) {
+    public Camera2D(Vector2 pos, float zoom = 1, Vector2? origin = null)
+    {
         _position = new Vector2(pos.X, pos.Y);
         _z = zoom;
         _origin = origin ?? Vector2.Zero;
@@ -22,7 +24,8 @@ public class Camera2D : Component {
     /// <summary>
     /// Updates the camera's matrices
     /// </summary>
-    public void UpdateMatrices() {
+    public void UpdateMatrices()
+    {
         _view = Matrix.CreateTranslation(-_position.X, -_position.Y, 0);
         Matrix origin = Matrix.CreateTranslation(_origin.X, _origin.Y, 0);
         Matrix scale = Matrix.CreateScale(_z, _z, 1);
@@ -39,9 +42,11 @@ public class Camera2D : Component {
     /// <summary>
     /// I do not recommend Setting this value.
     /// </summary>
-    public Matrix Transform {
+    public Matrix Transform
+    {
         get => _transform;
-        set {
+        set
+        {
             if (value == _transform) return;
 
             _transform = value;
@@ -49,9 +54,11 @@ public class Camera2D : Component {
         }
     }
 
-    public float Zoom {
+    public float Zoom
+    {
         get => _z;
-        set {
+        set
+        {
             if (value == _z) return;
 
             _z = value;
@@ -61,7 +68,8 @@ public class Camera2D : Component {
 
     public Vector2 Origin {
         get => _origin;
-        set {
+        set
+        {
             if (value == _origin) return;
 
             _origin = value;
@@ -71,7 +79,8 @@ public class Camera2D : Component {
 
     public Vector2 Position {
         get => _position;
-        set {
+        set
+        {
             if (value == _position) return;
 
             _position = value;
@@ -81,7 +90,8 @@ public class Camera2D : Component {
 
     public float X {
         get => _position.X;
-        set {
+        set
+        {
             if (value == _position.X) return;
 
             _position.X = value;
@@ -91,7 +101,8 @@ public class Camera2D : Component {
 
     public float Y {
         get => _position.Y;
-        set {
+        set
+        {
             if (value == _position.Y) return;
 
             _position.Y = value;

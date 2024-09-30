@@ -4,7 +4,8 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace MonoGayme.Components;
 
-public class AnimatedSpriteSheet : Component {
+public class AnimatedSpriteSheet : Component
+{
     private Vector2 _origin;
     private Vector2 _frameSize;
     private Texture2D _sprite;
@@ -22,7 +23,8 @@ public class AnimatedSpriteSheet : Component {
 
     public Action? OnSheetFinished;
 
-    public AnimatedSpriteSheet(Texture2D sprite, Vector2 size, float speed, bool loop = false, Vector2? origin = null) {
+    public AnimatedSpriteSheet(Texture2D sprite, Vector2 size, float speed, bool loop = false, Vector2? origin = null)
+    {
         _origin = origin ?? Vector2.Zero;
         
         _frameCount = size; 
@@ -36,7 +38,8 @@ public class AnimatedSpriteSheet : Component {
         Loop = loop;
     }
 
-    public void CycleAnimation(GameTime time) {
+    public void CycleAnimation(GameTime time)
+    {
         _frameTimer += (float)time.ElapsedGameTime.TotalSeconds;
         if (_frameTimer >= _speed) {
             _frameTimer = 0;
@@ -56,7 +59,8 @@ public class AnimatedSpriteSheet : Component {
         }
     }
 
-    public void Draw(SpriteBatch batch, Vector2 pos, bool flipped) {
+    public void Draw(SpriteBatch batch, Vector2 pos, bool flipped)
+    {
         batch.Draw(_sprite, pos, _source, Color.White, 0f, _origin, 1f, flipped ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 0f);
     }
 }
