@@ -2,7 +2,7 @@ using Microsoft.Xna.Framework;
 
 namespace MonoGayme.Components;
 
-public class Camera2D {
+public class Camera2D : Component {
     private Matrix _transform;
     private Matrix _view;
 

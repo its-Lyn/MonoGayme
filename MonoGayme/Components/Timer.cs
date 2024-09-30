@@ -7,43 +7,57 @@ namespace MonoGayme.Components;
 ///  Create a new Timer.
 /// </summary>
 /// <param name="time">The time untill the timeout in seconds.</param>
-public class Timer(float time, bool enabled, bool oneShot)
+public class Timer : Component
 {
     private float _timer = 0;
+    private float _time;
+    private bool _enabled;
+    private bool _oneShot;
 
     public Action? OnTimeOut;
 
+    public Timer(float time, bool enabled, bool oneShot, string? name = null)
+    {
+        _time = time;
+        _enabled = enabled;
+        _oneShot = oneShot;
+
+        Name = name;
+    }
+
     public void Cycle(GameTime gameTime)
     {
-        if (enabled)
-        { 
+        if (_enabled)
+        {
             _timer += (float)gameTime.ElapsedGameTime.TotalSeconds;
-            if (_timer >= time)
+            if (_timer >= _time)
             {
                 _timer = 0;
                 OnTimeOut?.Invoke();
 
-                if (oneShot)
+                if (_oneShot)
                 {
-                    enabled = false;
+                    _enabled = false;
                 }
             }
-        } 
+        }
     }
 
-    public void Stop() => enabled = false;
+    public void Stop() => _enabled = false;
 
-    public void Start() => enabled = true;
+    public void Start() => _enabled = true;
 
     public void Reset() => _timer = 0;
+
+    public bool Enabled => _enabled;
 
     public float TimeLeft
     {
         get
         {
-            if (enabled)
-            { 
-                return Math.Max(0, time - _timer);
+            if (_enabled)
+            {
+                return Math.Max(0, _time - _timer);
             }
 
             return 0;
@@ -52,11 +66,11 @@ public class Timer(float time, bool enabled, bool oneShot)
 
     public float Time
     {
-        get => time;
+        get => _time;
         set
         {
             if (value < 0) return;
-            time = value;
+            _time = value;
         }
     }
 }

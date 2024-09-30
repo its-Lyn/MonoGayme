@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace MonoGayme.Components;
 
-public class AnimatedSpriteSheet {
+public class AnimatedSpriteSheet : Component {
     private Vector2 _origin;
     private Vector2 _frameSize;
     private Texture2D _sprite;
