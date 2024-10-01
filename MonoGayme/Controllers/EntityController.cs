@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using MonoGayme.Components;
 using MonoGayme.Entities;
 
 namespace MonoGayme.Controllers;
 
-public class EntityController
+public class EntityController : Component
 {
     public List<Entity> Entities { get; private set; } = [];
     public Action<GraphicsDevice, GameTime, Entity>? OnEntityUpdate;

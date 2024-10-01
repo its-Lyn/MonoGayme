@@ -33,12 +33,12 @@ public class Timer : Component
             if (_timer >= _time)
             {
                 _timer = 0;
-                OnTimeOut?.Invoke();
-
                 if (_oneShot)
                 {
                     _enabled = false;
                 }
+
+                OnTimeOut?.Invoke();
             }
         }
     }

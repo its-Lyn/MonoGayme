@@ -10,7 +10,7 @@ using MonoGayme.Utilities;
 namespace MonoGayme.Controllers;
 
 /// <param name="allowInput">Allow buttons to be naviagted via keyboard or controller</param>
-public class ButtonController(bool allowNavigation)
+public class ButtonController(bool allowNavigation) : Component
 {
     private List<Button> _buttons = [];
 
