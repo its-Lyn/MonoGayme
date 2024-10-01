@@ -9,6 +9,11 @@ public class RectCollider : Component
 
     public bool Enabled = true;
 
+    public RectCollider(string? name = null)
+    {
+        Name = name;
+    }
+
     public Vector2 GetCentre()
         => new Vector2((Bounds.X + Bounds.Width) / 2, (Bounds.Y + Bounds.Height) / 2);
 
