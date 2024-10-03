@@ -59,7 +59,7 @@ public class AnimatedSpriteSheet : Component
         }
     }
 
-    public void Draw(SpriteBatch batch, Vector2 pos, bool flipped)
+    public void Draw(SpriteBatch batch, Vector2 pos, bool flipped = false)
     {
         batch.Draw(_sprite, pos, _source, Color.White, 0f, _origin, 1f, flipped ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 0f);
     }
