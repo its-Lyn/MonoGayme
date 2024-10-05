@@ -52,7 +52,7 @@ public class ButtonController(bool allowNavigation) : Component
     }
 
     /// <summary>
-    /// Set the controoler UI navigation keys. Should only be called if allowNavigation is true.
+    /// Set the controller UI navigation keys. Should only be called if allowNavigation is true.
     /// </summary>
     public void SetControllerButtons(Buttons gpUp, Buttons gpDown, Buttons gpAccept)
     {
