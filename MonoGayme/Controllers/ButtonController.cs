@@ -165,8 +165,7 @@ public class ButtonController(bool allowNavigation) : Component
 
                 _activeIdx++;
                 if (_activeIdx > _buttons.Count - 1)
-                {
-                    _activeIdx = _buttons.Count - 1;
+                {                    _activeIdx = _buttons.Count - 1;
                 }
 
                 OnActiveUpdated?.Invoke(_buttons[_activeIdx]);

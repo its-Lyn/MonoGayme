@@ -91,4 +91,7 @@ public class SpriteSheet : Component
 
         _source.Y -= value;
     }
+
+    public float X => _source.X;
+    public float Y => _source.Y;
 }
