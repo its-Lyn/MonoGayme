@@ -32,6 +32,20 @@ public class TextButton : Button
         Position = position;
     }
 
+    public void SetPosition(Vector2 position)
+    {
+        Position = position;
+
+        Vector2 textSize = _font.MeasureString(_text);
+        _rect = new Rectangle(
+            (int)position.X,
+            (int)position.Y,
+
+            (int)textSize.X,
+            (int)textSize.Y
+        );
+    }
+
     public override void Update(Vector2 mouse)
     {
         if (Collision.CheckRectPoint(mouse, _rect))

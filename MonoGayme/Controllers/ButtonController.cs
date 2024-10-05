@@ -13,6 +13,7 @@ namespace MonoGayme.Controllers;
 public class ButtonController(bool allowNavigation) : Component
 {
     private List<Button> _buttons = [];
+    private readonly HashSet<Button> _toRemove = [];
 
     private Keys? _kbUp;
     private Keys? _kbDown;
@@ -76,11 +77,30 @@ public class ButtonController(bool allowNavigation) : Component
         }
     }
 
-    public void Update(Vector2 mouse)
+    public void QueueRemoveAll()
     {
         foreach (Button button in _buttons)
         {
+            _toRemove.Add(button);
+        }
+    }
+
+    public void Update(Vector2 mouse)
+    {
+        if (_activeIdx > _buttons.Count - 1)
+        {
+            _activeIdx = _buttons.Count - 1;
+        }
+
+        foreach (Button button in _buttons)
+        {
             button.Update(mouse);
+        }
+
+        if (_toRemove.Count > 0)
+        {
+            _buttons.RemoveAll(_toRemove.Contains);
+            _toRemove.Clear();
         }
 
         if (!allowNavigation) return;
@@ -154,7 +174,7 @@ public class ButtonController(bool allowNavigation) : Component
         }
     }
 
-    public void Draw(SpriteBatch batch, Camera2D? camera)
+    public void Draw(SpriteBatch batch, Camera2D? camera = null)
     {
         foreach (Button button in _buttons)
             button.Draw(batch, camera);
