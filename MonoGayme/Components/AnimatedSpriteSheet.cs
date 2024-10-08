@@ -38,6 +38,12 @@ public class AnimatedSpriteSheet : Component
         Loop = loop;
     }
 
+    public void Reset()
+    {
+        _frameTimer = 0;
+        _frame = 0;
+    }
+
     public void CycleAnimation(GameTime time)
     {
         _frameTimer += (float)time.ElapsedGameTime.TotalSeconds;
@@ -63,4 +69,7 @@ public class AnimatedSpriteSheet : Component
     {
         batch.Draw(_sprite, pos, _source, Color.White, 0f, _origin, 1f, flipped ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 0f);
     }
+
+    public int Width => (int)_frameSize.X;
+    public int Height => (int)_frameSize.Y;
 }
