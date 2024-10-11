@@ -19,7 +19,7 @@ public static class MathUtility
         if (Math.Abs(to - from) <= delta)
             return to;
 
-        return from + (Math.Sign(to - from) * delta);
+        return from + Math.Sign(to - from) * delta;
     }
 
     public static Vector2 MoveTowards(Vector2 from, Vector2 to, float delta)

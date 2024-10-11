@@ -5,16 +5,16 @@ namespace MonoGayme.Components;
 
 public class SpriteSheet : Component
 {
-    private Texture2D _sprite;
+    private readonly Texture2D _sprite;
 
-    private Vector2 _origin;
+    private readonly Vector2 _origin;
 
-    private Vector2 _frameSize;
+    private readonly Vector2 _frameSize;
     private Vector2 _frameCount;
 
     private Rectangle _source;
 
-    private bool _wrap;
+    private readonly bool _wrap;
 
     public Vector2 Position;
 
@@ -35,7 +35,7 @@ public class SpriteSheet : Component
 
     public void Draw(SpriteBatch batch, Camera2D? camera = null)
     {
-        batch.Draw(_sprite, camera is null ? Position : camera.ScreenToWorld(Position), _source, Color.White, 0, _origin, 1, SpriteEffects.None, 0);
+        batch.Draw(_sprite, camera?.ScreenToWorld(Position) ?? Position, _source, Color.White, 0, _origin, 1, SpriteEffects.None, 0);
     }
 
     /// <summary>
@@ -51,7 +51,7 @@ public class SpriteSheet : Component
     public void DecrementX(int decrement = 1) {}
 
     /// <summary>
-    /// Increment the cell by it's Y axis.
+    /// Increment the cell by its Y axis.
     /// </summary>
     /// <param name="increment">How many times it should be incremented by.</param>
     public void IncrementY(int increment = 1)

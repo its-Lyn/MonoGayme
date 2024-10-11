@@ -1,7 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Diagnostics;
-using System.Numerics;
 using Vector2 = Microsoft.Xna.Framework.Vector2;
 
 namespace MonoGayme.Extensions;

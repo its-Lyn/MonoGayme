@@ -10,7 +10,7 @@ namespace MonoGayme.Controllers;
 
 public class EntityController : Component
 {
-    public List<Entity> Entities { get; private set; } = [];
+    public List<Entity> Entities { get; } = [];
     public Action<GraphicsDevice, GameTime, Entity>? OnEntityUpdate;
 
     private bool _sort;

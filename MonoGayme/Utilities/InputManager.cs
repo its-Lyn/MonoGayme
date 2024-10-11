@@ -1,4 +1,3 @@
-using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
@@ -52,7 +51,7 @@ public static class InputManager
     public static bool IsGamePadPressed(Buttons btn) => _currentControllerState.IsButtonDown(btn) && _previousControllerState.IsButtonUp(btn);
 
     /// <summary>
-    /// Update the input device state. Must only be ran once a frame.
+    /// Update the input device state. Must only be run once a frame.
     /// </summary>
     public static void GetState()
     {

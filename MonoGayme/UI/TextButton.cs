@@ -10,8 +10,8 @@ namespace MonoGayme.UI;
 public class TextButton : Button
 {
     private Rectangle _rect;
-    private SpriteFont _font;
-    private string _text;
+    private readonly SpriteFont _font;
+    private readonly string _text;
 
     private bool _holding;
 
@@ -53,11 +53,9 @@ public class TextButton : Button
             if (Mouse.GetState().LeftButton == ButtonState.Pressed)
                 _holding = true;
 
-            if (Mouse.GetState().LeftButton == ButtonState.Released && _holding)
-            {
-                RunAction();
-                _holding = false;
-            }
+            if (Mouse.GetState().LeftButton != ButtonState.Released || !_holding) return;
+            RunAction();
+            _holding = false;
         }
         else
         {

@@ -9,7 +9,7 @@ namespace MonoGayme.Utilities;
 /// Creates a new renderer that will be drawn in the middle of the screen, scaled.
 /// </summary>
 public class Renderer(Vector2 size, GraphicsDevice graphics) {
-    private RenderTarget2D _renderer = new RenderTarget2D(graphics, (int)size.X, (int)size.Y);
+    private readonly RenderTarget2D _renderer = new RenderTarget2D(graphics, (int)size.X, (int)size.Y);
 
     /// <summary>
     /// Gets the screen scale based on the renderer size.

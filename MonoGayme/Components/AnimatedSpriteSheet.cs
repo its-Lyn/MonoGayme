@@ -6,20 +6,20 @@ namespace MonoGayme.Components;
 
 public class AnimatedSpriteSheet : Component
 {
-    private Vector2 _origin;
-    private Vector2 _frameSize;
-    private Texture2D _sprite;
+    private readonly Vector2 _origin;
+    private readonly Vector2 _frameSize;
+    private readonly Texture2D _sprite;
 
-    private Vector2 _frameCount; 
+    private readonly Vector2 _frameCount; 
 
     private Rectangle _source;
 
-    private float _speed;
-    private float _frameTimer = 0;
-    private int _frame = 0;
+    private readonly float _speed;
+    private float _frameTimer;
+    private int _frame;
 
     public bool Finished = true;
-    public bool Loop;
+    public readonly bool Loop;
 
     public Action? OnSheetFinished;
 
@@ -47,22 +47,22 @@ public class AnimatedSpriteSheet : Component
     public void CycleAnimation(GameTime time)
     {
         _frameTimer += (float)time.ElapsedGameTime.TotalSeconds;
-        if (_frameTimer >= _speed) {
-            _frameTimer = 0;
+        if (!(_frameTimer >= _speed)) return;
+        _frameTimer = 0;
 
-            _frame++;
-            if (_frame >= _frameCount.X) {
-                _frame = 0;
+        _frame++;
+        if (_frame >= _frameCount.X)
+        {
+            _frame = 0;
 
-                if (!Loop) {
-                    Finished = true;
-                }
-
-                OnSheetFinished?.Invoke();
+            if (!Loop) {
+                Finished = true;
             }
 
-            _source.X = (int)(_frame * _frameSize.X);
+            OnSheetFinished?.Invoke();
         }
+
+        _source.X = (int)(_frame * _frameSize.X);
     }
 
     public void Draw(SpriteBatch batch, Vector2 pos, bool flipped = false)

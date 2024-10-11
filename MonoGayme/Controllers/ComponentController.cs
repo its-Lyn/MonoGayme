@@ -5,7 +5,7 @@ namespace MonoGayme.Controllers;
 
 public class ComponentController
 {
-    public List<Component> Components { get; private set; } = [];
+    public List<Component> Components { get; } = [];
 
     public void AddComponent(Component component)
         => Components.Add(component);
@@ -29,7 +29,7 @@ public class ComponentController
        => Components.Remove(component);
 
     /// <summary>
-    /// Remove a component using it's name.
+    /// Remove a component using its name.
     /// </summary>
     public void Remove(string name)
     {

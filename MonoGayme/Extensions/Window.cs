@@ -1,6 +1,6 @@
 using Microsoft.Xna.Framework;
 
-namespace MonoGayme.Utilities;
+namespace MonoGayme.Extensions;
 
 public static partial class Extensions
 {

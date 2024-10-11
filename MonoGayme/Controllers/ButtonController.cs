@@ -9,10 +9,10 @@ using MonoGayme.Utilities;
 
 namespace MonoGayme.Controllers;
 
-/// <param name="allowInput">Allow buttons to be naviagted via keyboard or controller</param>
+/// <param name="allowNavigation">Allow buttons to be navigated via keyboard or controller</param>
 public class ButtonController(bool allowNavigation) : Component
 {
-    private List<Button> _buttons = [];
+    private readonly List<Button> _buttons = [];
     private readonly HashSet<Button> _toRemove = [];
 
     private Keys? _kbUp;
@@ -23,7 +23,7 @@ public class ButtonController(bool allowNavigation) : Component
     private Buttons? _gpDown;
     private Buttons? _gpAccept;
 
-    private int _activeIdx = 0;
+    private int _activeIdx;
 
     /// <summary>
     /// Ran after the active button is changed.
