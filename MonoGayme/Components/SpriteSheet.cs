@@ -16,9 +16,7 @@ public class SpriteSheet : Component
 
     private readonly bool _wrap;
 
-    public Vector2 Position;
-
-    public SpriteSheet(Texture2D sprite, Vector2 frameCount, Vector2 position, bool wrap = false, Vector2? origin = null)
+    public SpriteSheet(Texture2D sprite, Vector2 frameCount, bool wrap = false, Vector2? origin = null)
     { 
         _origin = origin ?? Vector2.Zero;
         _frameCount = frameCount;
@@ -28,14 +26,13 @@ public class SpriteSheet : Component
 
         _wrap = wrap;
 
-        Position = position;
 
         _sprite = sprite;
     }
 
-    public void Draw(SpriteBatch batch, Camera2D? camera = null)
+    public void Draw(SpriteBatch batch, Vector2 position, Camera2D? camera = null)
     {
-        batch.Draw(_sprite, camera?.ScreenToWorld(Position) ?? Position, _source, Color.White, 0, _origin, 1, SpriteEffects.None, 0);
+        batch.Draw(_sprite, camera?.ScreenToWorld(position) ?? position, _source, Color.White, 0, _origin, 1, SpriteEffects.None, 0);
     }
 
     /// <summary>
