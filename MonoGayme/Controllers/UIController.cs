@@ -12,6 +12,7 @@ namespace MonoGayme.Controllers;
 public class UIController(bool allowNavigation)
 {
     private readonly List<IElement> _elements = [];
+    private readonly List<IElement> _ignored = [];
     private readonly HashSet<IElement> _toRemove = [];
     
     private Keys? _kbUp;
@@ -66,9 +67,9 @@ public class UIController(bool allowNavigation)
         _gpAccept = gpAccept;
     }
 
-    public void Add<TElement>(TElement button) where TElement : IElement
+    public void Add<TElement>(TElement element) where TElement : IElement
     {
-        _elements.Add(button);
+        _elements.Add(element);
 
         if (allowNavigation && _elements.Count == 1)
         {
@@ -76,12 +77,19 @@ public class UIController(bool allowNavigation)
         }
     }
     
+    /// <summary>
+    /// Add a UI Element to the UI Controller, these are ignored by the navigator.
+    /// </summary>
+    public void AddIgnored<TIgnored>(TIgnored element) where TIgnored : IElement
+        => _ignored.Add(element);
+    
     public void QueueRemoveAll()
     {
         foreach (IElement element in _elements)
-        {
             _toRemove.Add(element);
-        }
+
+        foreach (IElement element in _ignored)
+            _toRemove.Add(element);        
     }
 
     public void Update(Vector2 mouse)
@@ -90,6 +98,9 @@ public class UIController(bool allowNavigation)
             _activeIdx = _elements.Count - 1;
 
         foreach (IElement element in _elements)
+            element.Update(mouse);
+        
+        foreach (IElement element in _ignored)
             element.Update(mouse);
 
         if (_toRemove.Count > 0)
@@ -160,6 +171,9 @@ public class UIController(bool allowNavigation)
     public void Draw(SpriteBatch batch, Camera2D? camera = null)
     {
         foreach (IElement element in _elements)
+            element.Draw(batch, camera);
+        
+        foreach (IElement element in _ignored)
             element.Draw(batch, camera);
     }
 }
