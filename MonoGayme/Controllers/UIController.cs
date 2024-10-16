@@ -9,12 +9,11 @@ using MonoGayme.Utilities;
 
 namespace MonoGayme.Controllers;
 
-/// <param name="allowNavigation">Allow buttons to be navigated via keyboard or controller</param>
-public class ButtonController(bool allowNavigation) : Component
+public class UIController(bool allowNavigation)
 {
-    private readonly List<Button> _buttons = [];
-    private readonly HashSet<Button> _toRemove = [];
-
+    private readonly List<IElement> _elements = [];
+    private readonly HashSet<IElement> _toRemove = [];
+    
     private Keys? _kbUp;
     private Keys? _kbDown;
     private Keys? _kbAccept;
@@ -28,12 +27,12 @@ public class ButtonController(bool allowNavigation) : Component
     /// <summary>
     /// Ran after the active button is changed.
     /// </summary>
-    public Action<Button>? OnActiveUpdated;
+    public Action<IElement>? OnActiveUpdated;
 
     /// <summary>
     /// Ran before the active button is changed
     /// </summary>
-    public Action<Button>? OnActiveUpdating;
+    public Action<IElement>? OnActiveUpdating;
 
     /// <summary>
     /// Set the keyboard UI navigation keys. Should only be called if allowNavigation is true. 
@@ -67,115 +66,100 @@ public class ButtonController(bool allowNavigation) : Component
         _gpAccept = gpAccept;
     }
 
-    public void Add<T>(T button) where T : Button
+    public void Add<TElement>(TElement button) where TElement : IElement
     {
-        _buttons.Add(button);
+        _elements.Add(button);
 
-        if (allowNavigation && _buttons.Count == 1)
+        if (allowNavigation && _elements.Count == 1)
         {
-            OnActiveUpdated?.Invoke(_buttons[_activeIdx]);
+            OnActiveUpdated?.Invoke(_elements[_activeIdx]);
         }
     }
-
+    
     public void QueueRemoveAll()
     {
-        foreach (Button button in _buttons)
+        foreach (IElement element in _elements)
         {
-            _toRemove.Add(button);
+            _toRemove.Add(element);
         }
     }
 
     public void Update(Vector2 mouse)
     {
-        if (_activeIdx > _buttons.Count - 1)
-        {
-            _activeIdx = _buttons.Count - 1;
-        }
+        if (_activeIdx > _elements.Count - 1)
+            _activeIdx = _elements.Count - 1;
 
-        foreach (Button button in _buttons)
-        {
-            button.Update(mouse);
-        }
+        foreach (IElement element in _elements)
+            element.Update(mouse);
 
         if (_toRemove.Count > 0)
         {
-            _buttons.RemoveAll(_toRemove.Contains);
+            _elements.RemoveAll(_toRemove.Contains);
             _toRemove.Clear();
         }
-
+        
         if (!allowNavigation) return;
 
         if (_gpDown.HasValue && _gpUp.HasValue && _gpAccept.HasValue)
         {
             if (InputManager.IsGamePadPressed(_gpAccept.Value))
-            {
-                _buttons[_activeIdx].RunAction();
-            }
+                _elements[_activeIdx].RunAction();
 
             if (InputManager.IsGamePadPressed(_gpUp.Value))
             {
-                OnActiveUpdating?.Invoke(_buttons[_activeIdx]);
+                OnActiveUpdating?.Invoke(_elements[_activeIdx]);
 
                 _activeIdx--;
                 if (_activeIdx < 0)
-                {
                     _activeIdx = 0;
-                }
 
-                OnActiveUpdated?.Invoke(_buttons[_activeIdx]);
+                OnActiveUpdated?.Invoke(_elements[_activeIdx]);
             }
 
             if (InputManager.IsGamePadPressed(_gpDown.Value))
             {
-                OnActiveUpdating?.Invoke(_buttons[_activeIdx]);
+                OnActiveUpdating?.Invoke(_elements[_activeIdx]);
 
                 _activeIdx++;
-                if (_activeIdx > _buttons.Count - 1)
-                {
-                    _activeIdx = _buttons.Count - 1;
-                }
+                if (_activeIdx > _elements.Count - 1)
+                    _activeIdx = _elements.Count - 1;
 
-                OnActiveUpdated?.Invoke(_buttons[_activeIdx]);
+                OnActiveUpdated?.Invoke(_elements[_activeIdx]);
             }
         }
 
         if (_kbDown.HasValue && _kbUp.HasValue && _kbAccept.HasValue)
         {
             if (InputManager.IsKeyPressed(_kbAccept.Value))
-            {
-                _buttons[_activeIdx].RunAction();
-            }
+                _elements[_activeIdx].RunAction();
 
             if (InputManager.IsKeyPressed(_kbUp.Value))
             {
-                OnActiveUpdating?.Invoke(_buttons[_activeIdx]);
+                OnActiveUpdating?.Invoke(_elements[_activeIdx]);
 
                 _activeIdx--;
                 if (_activeIdx < 0)
-                {
                     _activeIdx = 0;
-                }
 
-                OnActiveUpdated?.Invoke(_buttons[_activeIdx]);
+                OnActiveUpdated?.Invoke(_elements[_activeIdx]);
             }
 
             if (InputManager.IsKeyPressed(_kbDown.Value))
             {
-                OnActiveUpdating?.Invoke(_buttons[_activeIdx]);
+                OnActiveUpdating?.Invoke(_elements[_activeIdx]);
 
                 _activeIdx++;
-                if (_activeIdx > _buttons.Count - 1)
-                {                    _activeIdx = _buttons.Count - 1;
-                }
+                if (_activeIdx > _elements.Count - 1)
+                    _activeIdx = _elements.Count - 1;
 
-                OnActiveUpdated?.Invoke(_buttons[_activeIdx]);
+                OnActiveUpdated?.Invoke(_elements[_activeIdx]);
             }
         }
     }
-
+    
     public void Draw(SpriteBatch batch, Camera2D? camera = null)
     {
-        foreach (Button button in _buttons)
-            button.Draw(batch, camera);
+        foreach (IElement element in _elements)
+            element.Draw(batch, camera);
     }
 }

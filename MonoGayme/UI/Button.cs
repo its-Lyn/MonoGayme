@@ -5,12 +5,12 @@ using MonoGayme.Components;
 
 namespace MonoGayme.UI;
 
-public abstract class Button
+public abstract class Button : IElement
 {
     public Action? OnClick;
 
     public Vector2 Position;
-    public Color Colour;
+    public Color Colour { get; set; }
 
     public abstract void Update(Vector2 mouse);
     public abstract void Draw(SpriteBatch batch, Camera2D? camera);
