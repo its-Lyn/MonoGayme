@@ -5,10 +5,9 @@ using MonoGayme.Controllers;
 
 namespace MonoGayme.Entities;
 
-public abstract class Entity(Game windowData, int zIndex = 0)
+public abstract class Entity(int zIndex = 0)
 {
     public readonly int ZIndex = zIndex;
-    protected readonly Game WindowData = windowData;
 
     public readonly ComponentController Components = new ComponentController();
 
