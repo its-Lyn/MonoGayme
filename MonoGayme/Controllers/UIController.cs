@@ -25,12 +25,12 @@ public class UIController(bool allowNavigation)
     private int _activeIdx;
 
     /// <summary>
-    /// Ran after the active button is changed.
+    /// Ran after the active element is changed.
     /// </summary>
     public Action<IElement>? OnActiveUpdated;
 
     /// <summary>
-    /// Ran before the active button is changed
+    /// Ran before the active element is changed
     /// </summary>
     public Action<IElement>? OnActiveUpdating;
 
