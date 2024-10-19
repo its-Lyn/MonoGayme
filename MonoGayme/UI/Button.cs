@@ -5,7 +5,7 @@ using MonoGayme.Components;
 
 namespace MonoGayme.UI;
 
-public abstract class Button : IElement
+public abstract class Button(bool ignoreMouse) : IElement
 {
     public Action? OnClick;
 

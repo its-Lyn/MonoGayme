@@ -14,8 +14,9 @@ public class TextButton : Button
     private readonly string _text;
 
     private bool _holding;
+    private bool _ignoreMouse;
 
-    public TextButton(SpriteFont font, string text, Vector2 position, Color colour)
+    public TextButton(SpriteFont font, string text, Vector2 position, Color colour, bool ignoreMouse = false) : base(ignoreMouse)
     {
         Vector2 textSize = font.MeasureString(text);
         _rect = new Rectangle(
@@ -30,6 +31,8 @@ public class TextButton : Button
         _text = text;
         Colour = colour;
         Position = position;
+        
+        _ignoreMouse = ignoreMouse;
     }
 
     public void SetPosition(Vector2 position)
@@ -48,6 +51,8 @@ public class TextButton : Button
 
     public override void Update(Vector2 mouse)
     {
+        if (_ignoreMouse) return;
+        
         if (Collision.CheckRectPoint(mouse, _rect))
         {
             if (Mouse.GetState().LeftButton == ButtonState.Pressed)
