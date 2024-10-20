@@ -36,6 +36,18 @@ public static class InputManager
     public static bool IsKeyPressed(Keys key) =>_currentState.IsKeyDown(key) && _previousState.IsKeyUp(key);
 
     /// <summary>
+    /// Get first pressed key on the keyboard.
+    /// </summary>
+    public static Keys? GetFirstKey()
+    {
+        Keys[] keys = _currentState.GetPressedKeys();
+        if (keys.Length > 0)
+            return keys[0];
+
+        return null;
+    }
+    
+    /// <summary>
     /// Check if a controller button is down.
     /// </summary>
     public static bool IsGamePadDown(Buttons btn) => _currentControllerState.IsButtonDown(btn);

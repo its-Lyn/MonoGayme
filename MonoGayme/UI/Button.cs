@@ -7,7 +7,7 @@ namespace MonoGayme.UI;
 
 public abstract class Button(bool ignoreMouse) : IElement
 {
-    public Action? OnClick;
+    public Action<Button>? OnClick;
 
     public Vector2 Position;
     public Color Colour { get; set; }
@@ -23,6 +23,6 @@ public abstract class Button(bool ignoreMouse) : IElement
             return;
         }
 
-        OnClick?.Invoke();
+        OnClick?.Invoke(this);
     }
 }

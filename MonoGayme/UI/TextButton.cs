@@ -11,7 +11,7 @@ public class TextButton : Button
 {
     private Rectangle _rect;
     private readonly SpriteFont _font;
-    private readonly string _text;
+    private string _text;
 
     private bool _holding;
     private bool _ignoreMouse;
@@ -35,10 +35,22 @@ public class TextButton : Button
         _ignoreMouse = ignoreMouse;
     }
 
+    public void SetText(string text)
+    {
+        _text = text;
+        Vector2 textSize = _font.MeasureString(_text);
+        _rect = new Rectangle(
+            (int)Position.X,
+            (int)Position.Y,
+
+            (int)textSize.X,
+            (int)textSize.Y
+        );
+    }
+
     public void SetPosition(Vector2 position)
     {
         Position = position;
-
         Vector2 textSize = _font.MeasureString(_text);
         _rect = new Rectangle(
             (int)position.X,
@@ -59,6 +71,7 @@ public class TextButton : Button
                 _holding = true;
 
             if (Mouse.GetState().LeftButton != ButtonState.Released || !_holding) return;
+            
             RunAction();
             _holding = false;
         }

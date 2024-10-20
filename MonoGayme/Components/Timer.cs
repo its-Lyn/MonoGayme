@@ -30,6 +30,7 @@ public class Timer : Component
         
         if (!(_timer >= _time)) return;
         _timer = 0;
+        
         if (_oneShot)
             Enabled = false;
 
