@@ -43,20 +43,9 @@ public class Timer : Component
 
     public void Reset() => _timer = 0;
 
-    public bool Enabled { get; private set; }
+    public bool Enabled { get; set; }
 
-    public float TimeLeft
-    {
-        get
-        {
-            if (Enabled)
-            {
-                return Math.Max(0, _time - _timer);
-            }
-
-            return 0;
-        }
-    }
+    public float TimeLeft => Math.Max(0, _time - _timer);
 
     public float Time
     {
